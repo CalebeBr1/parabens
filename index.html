@@ -3,33 +3,512 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Aniversário Gabbessy!</title>
+    <title>Feliz Aniversário, Gabbessy!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #0b0b0b; color: white; font-family: 'Courier New', monospace; display: flex; flex-direction: column; align-items: center; padding: 20px; }
-        .typing { border-right: 3px solid #00ff41; white-space: nowrap; overflow: hidden; width: 0; animation: typing 3s steps(30, end) forwards, blink 0.8s infinite; font-size: 1.2rem; color: #00ff41; }
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink { from, to { border-color: transparent } 50% { border-color: #00ff41; } }
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; width: 100%; max-width: 800px; margin-top: 30px; }
-        img { width: 100%; border-radius: 8px; border: 2px solid #7B2CBF; transition: 0.3s; }
-        img:hover { transform: scale(1.05); }
-        .music { margin-top: 30px; width: 100%; max-width: 400px; }
+        :root {
+            --green: #00ff41;
+            --purple: #7B2CBF;
+            --purple-light: #9D4EDD;
+            --purple-dark: #3C096C;
+            --bg: #080810;
+            --bg2: #0d0d1a;
+            --surface: rgba(123, 44, 191, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Scanline overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.07) 2px,
+                rgba(0,0,0,0.07) 4px
+            );
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* Grid bg */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                linear-gradient(rgba(123,44,191,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(123,44,191,0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .sys-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            color: var(--green);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 0.5s 0.2s forwards;
+            margin-bottom: 16px;
+        }
+
+        .title-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        h1 {
+            font-size: clamp(2.4rem, 7vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            color: transparent;
+            background: linear-gradient(135deg, #fff 30%, var(--purple-light) 70%, var(--green) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s 0.5s forwards;
+        }
+
+        .title-glitch {
+            position: absolute;
+            top: 0; left: 0;
+            font-size: clamp(2.4rem, 7vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            color: var(--purple-light);
+            opacity: 0;
+            animation: glitch 5s 2s infinite;
+            clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+            transform: translateX(-3px);
+        }
+
+        .subtitle {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: clamp(0.75rem, 2vw, 0.9rem);
+            color: rgba(255,255,255,0.45);
+            letter-spacing: 3px;
+            margin-top: 12px;
+            opacity: 0;
+            animation: fadeIn 0.8s 1s forwards;
+        }
+
+        /* QUOTE SECTION */
+        .quote-section {
+            text-align: center;
+            margin: 0 auto 60px;
+            max-width: 560px;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s 1.2s forwards;
+        }
+
+        .quote-box {
+            border: 1px solid rgba(123,44,191,0.3);
+            border-left: 3px solid var(--green);
+            background: rgba(0,255,65,0.03);
+            padding: 20px 28px;
+            border-radius: 0 6px 6px 0;
+            text-align: left;
+        }
+
+        .quote-box p {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.6;
+        }
+
+        .quote-box p::before { content: '> '; color: var(--green); }
+
+        .quote-source {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            margin-top: 10px;
+            text-align: right;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        /* MUSIC PLAYER */
+        .music-section {
+            opacity: 0;
+            animation: fadeSlideUp 0.8s 1.5s forwards;
+            margin-bottom: 60px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .section-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            color: var(--green);
+            letter-spacing: 3px;
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(123,44,191,0.5), transparent);
+        }
+
+        .player-card {
+            background: var(--surface);
+            border: 1px solid rgba(123,44,191,0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        @media (max-width: 600px) {
+            .player-card { grid-template-columns: 1fr; }
+        }
+
+        .player-card iframe {
+            display: block;
+            width: 100%;
+            height: 220px;
+            border: none;
+        }
+
+        .player-info {
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 12px;
+            border-left: 1px solid rgba(123,44,191,0.15);
+        }
+
+        .player-info .track-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: var(--green);
+            letter-spacing: 3px;
+        }
+
+        .player-info .track-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .player-info .track-artist {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.45);
+        }
+
+        .waveform {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 28px;
+            margin-top: 8px;
+        }
+
+        .waveform span {
+            display: block;
+            width: 3px;
+            border-radius: 2px;
+            background: var(--purple-light);
+            animation: wave 1.2s ease-in-out infinite alternate;
+        }
+
+        .waveform span:nth-child(1) { height: 8px; animation-delay: 0s; }
+        .waveform span:nth-child(2) { height: 20px; animation-delay: 0.1s; }
+        .waveform span:nth-child(3) { height: 14px; animation-delay: 0.2s; }
+        .waveform span:nth-child(4) { height: 24px; animation-delay: 0.15s; }
+        .waveform span:nth-child(5) { height: 10px; animation-delay: 0.3s; }
+        .waveform span:nth-child(6) { height: 18px; animation-delay: 0.05s; }
+        .waveform span:nth-child(7) { height: 22px; animation-delay: 0.25s; }
+        .waveform span:nth-child(8) { height: 12px; animation-delay: 0.35s; }
+
+        /* GALLERY */
+        .gallery-section {
+            opacity: 0;
+            animation: fadeSlideUp 0.8s 1.8s forwards;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto;
+            gap: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(123,44,191,0.2);
+            background: var(--bg2);
+            cursor: pointer;
+        }
+
+        .gallery-item.featured {
+            grid-column: span 2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease, filter 0.5s ease;
+            filter: saturate(0.85) brightness(0.9);
+            min-height: 200px;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.06);
+            filter: saturate(1.1) brightness(1.05);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .gallery-item:hover::after {
+            border-color: var(--purple-light);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(8,8,16,0.85));
+            padding: 20px 14px 12px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+        .gallery-tag {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: var(--green);
+            letter-spacing: 2px;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            opacity: 0;
+            animation: fadeIn 1s 2.5s forwards;
+        }
+
+        .footer-msg {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.25);
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .heart {
+            color: var(--purple-light);
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background: var(--purple-light);
+            opacity: 0;
+            animation: float linear infinite;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes glitch {
+            0%, 85%, 100% { opacity: 0; transform: translateX(-3px); }
+            86% { opacity: 0.4; transform: translateX(-3px); }
+            87% { opacity: 0; transform: translateX(3px); }
+            88% { opacity: 0.3; transform: translateX(-2px); }
+            89% { opacity: 0; }
+        }
+
+        @keyframes wave {
+            to { transform: scaleY(0.4); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
     </style>
 </head>
 <body>
 
-    <h1 class="typing">Parabéns, Gabbessy (Liz)!</h1>
-    <p>"Eu eu eu não sei... mas parabéns!"</p>
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
 
-    <div class="music">
-        <iframe width="100%" height="180" src="https://www.youtube.com/embed/oAur1xQx-sc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div class="page-wrapper">
+
+        <header>
+            <p class="sys-label">// sistema de felicitação ativado</p>
+            <div class="title-wrapper">
+                <h1>Parabéns,<br>Gabbessy (Liz)!</h1>
+                <div class="title-glitch" aria-hidden="true">Parabéns,<br>Gabbessy (Liz)!</div>
+            </div>
+            <p class="subtitle">— aniversário confirmado no sistema —</p>
+        </header>
+
+        <div class="quote-section">
+            <div class="quote-box">
+                <p>Eu eu eu não sei... mas parabéns!</p>
+            </div>
+            <p class="quote-source">// mensagem arquivada</p>
+        </div>
+
+        <section class="music-section">
+            <div class="section-header">
+                <span class="section-label">// trilha sonora</span>
+                <div class="section-line"></div>
+            </div>
+            <div class="player-card">
+                <iframe src="https://www.youtube.com/embed/oAur1xQx-sc?autoplay=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <div class="player-info">
+                    <span class="track-label">// tocando agora</span>
+                    <p class="track-name">Vacations — Vibes</p>
+                    <p class="track-artist">uma trilha pra esse dia especial</p>
+                    <div class="waveform">
+                        <span></span><span></span><span></span><span></span>
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery-section">
+            <div class="section-header">
+                <span class="section-label">// galeria de referências</span>
+                <div class="section-line"></div>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item featured">
+                    <img src="https://images3.alphacoders.com/511/thumb-1920-51109.jpg" alt="Evangelion characters">
+                    <div class="gallery-overlay">
+                        <span class="gallery-tag">// neon genesis evangelion</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images5.alphacoders.com/117/1178776.jpg" alt="Anime scene at crossing">
+                    <div class="gallery-overlay">
+                        <span class="gallery-tag">// bloom</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://wallpapers.com/images/featured/evangelion-ia5qgwb2kaalx8lm.jpg" alt="Eva unit">
+                    <div class="gallery-overlay">
+                        <span class="gallery-tag">// eva unit-01</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images7.alphacoders.com/117/thumb-1920-1178790.jpg" alt="Anime dancing scene">
+                    <div class="gallery-overlay">
+                        <span class="gallery-tag">// bloom</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p class="footer-msg">feito com muito <span class="heart">♥</span> pra você</p>
+            <p class="footer-msg" style="font-size:0.65rem; margin-top:4px;">calebebr1.github.io</p>
+        </footer>
+
     </div>
 
-    <div class="gallery">
-        <img src="https://images3.alphacoders.com/511/thumb-1920-51109.jpg" alt="Eva">
-        <img src="https://images5.alphacoders.com/117/1178776.jpg" alt="Bloom">
-        <img src="https://wallpapers.com/images/featured/evangelion-ia5qgwb2kaalx8lm.jpg" alt="Eva 2">
-        <img src="https://images7.alphacoders.com/117/thumb-1920-1178790.jpg" alt="Bloom 2">
-    </div>
+    <script>
+        // Generate floating particles
+        const container = document.getElementById('particles');
+        const colors = ['#7B2CBF', '#9D4EDD', '#00ff41', '#ffffff'];
+        for (let i = 0; i < 35; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDuration = (10 + Math.random() * 20) + 's';
+            p.style.animationDelay = (Math.random() * 15) + 's';
+            p.style.width = p.style.height = (1 + Math.random() * 3) + 'px';
+            p.style.background = colors[Math.floor(Math.random() * colors.length)];
+            p.style.opacity = 0;
+            container.appendChild(p);
+        }
+    </script>
 
 </body>
 </html>
