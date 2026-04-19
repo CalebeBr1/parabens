@@ -26,7 +26,6 @@
             overflow-x: hidden;
         }
 
-        /* Scanline overlay */
         body::before {
             content: '';
             position: fixed;
@@ -43,7 +42,6 @@
             z-index: 999;
         }
 
-        /* Grid bg */
         body::after {
             content: '';
             position: fixed;
@@ -65,7 +63,6 @@
             padding: 60px 24px 80px;
         }
 
-        /* HEADER */
         header {
             text-align: center;
             margin-bottom: 60px;
@@ -124,7 +121,6 @@
             animation: fadeIn 0.8s 1s forwards;
         }
 
-        /* QUOTE SECTION */
         .quote-section {
             text-align: center;
             margin: 0 auto 60px;
@@ -159,7 +155,6 @@
             font-family: 'Share Tech Mono', monospace;
         }
 
-        /* MUSIC PLAYER */
         .music-section {
             opacity: 0;
             animation: fadeSlideUp 0.8s 1.5s forwards;
@@ -259,7 +254,6 @@
         .waveform span:nth-child(7) { height: 22px; animation-delay: 0.25s; }
         .waveform span:nth-child(8) { height: 12px; animation-delay: 0.35s; }
 
-        /* GALLERY */
         .gallery-section {
             opacity: 0;
             animation: fadeSlideUp 0.8s 1.8s forwards;
@@ -268,7 +262,6 @@
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: auto auto;
             gap: 12px;
         }
 
@@ -335,7 +328,6 @@
             letter-spacing: 2px;
         }
 
-        /* FOOTER */
         footer {
             text-align: center;
             margin-top: 80px;
@@ -357,7 +349,6 @@
             display: inline-block;
         }
 
-        /* Floating particles */
         .particles {
             position: fixed;
             top: 0; left: 0;
@@ -376,16 +367,11 @@
             animation: float linear infinite;
         }
 
-        /* ANIMATIONS */
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
+        @keyframes fadeIn { to { opacity: 1; } }
         @keyframes fadeSlideUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes glitch {
             0%, 85%, 100% { opacity: 0; transform: translateX(-3px); }
             86% { opacity: 0.4; transform: translateX(-3px); }
@@ -393,18 +379,13 @@
             88% { opacity: 0.3; transform: translateX(-2px); }
             89% { opacity: 0; }
         }
-
-        @keyframes wave {
-            to { transform: scaleY(0.4); }
-        }
-
+        @keyframes wave { to { transform: scaleY(0.4); } }
         @keyframes float {
             0% { transform: translateY(100vh); opacity: 0; }
             10% { opacity: 0.6; }
             90% { opacity: 0.3; }
             100% { transform: translateY(-10vh); opacity: 0; }
         }
-
         @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2); }
@@ -413,13 +394,12 @@
 </head>
 <body>
 
-    <!-- Floating particles -->
     <div class="particles" id="particles"></div>
 
     <div class="page-wrapper">
 
         <header>
-            <p class="sys-label">// sistema de felicitação ativado</p>
+            <p class="sys-label">FELIZ ANIVERSÁRIO!!!</p>
             <div class="title-wrapper">
                 <h1>Parabéns,<br>Gabbessy (Liz)!</h1>
                 <div class="title-glitch" aria-hidden="true">Parabéns,<br>Gabbessy (Liz)!</div>
@@ -429,9 +409,9 @@
 
         <div class="quote-section">
             <div class="quote-box">
-                <p>Eu eu eu não sei... mas parabéns!</p>
+                <p>Feliz aniversário! Que hoje seja um dia mto especial pra vc :3</p>
             </div>
-            <p class="quote-source">// mensagem arquivada</p>
+            <p class="quote-source">De: Sr Cat.</p>
         </div>
 
         <section class="music-section">
@@ -459,42 +439,72 @@
                 <div class="section-line"></div>
             </div>
             <div class="gallery-grid">
+
+                <!-- 1: featured -->
                 <div class="gallery-item featured">
                     <img src="https://images3.alphacoders.com/511/thumb-1920-51109.jpg" alt="Evangelion characters">
-                    <div class="gallery-overlay">
-                        <span class="gallery-tag">// neon genesis evangelion</span>
-                    </div>
+                    <div class="gallery-overlay"><span class="gallery-tag">// neon genesis evangelion</span></div>
                 </div>
+                <!-- 2 -->
                 <div class="gallery-item">
                     <img src="https://images5.alphacoders.com/117/1178776.jpg" alt="Anime scene at crossing">
-                    <div class="gallery-overlay">
-                        <span class="gallery-tag">// bloom</span>
-                    </div>
+                    <div class="gallery-overlay"><span class="gallery-tag">// bloom</span></div>
                 </div>
+
+                <!-- 3 -->
                 <div class="gallery-item">
                     <img src="https://wallpapers.com/images/featured/evangelion-ia5qgwb2kaalx8lm.jpg" alt="Eva unit">
-                    <div class="gallery-overlay">
-                        <span class="gallery-tag">// eva unit-01</span>
-                    </div>
+                    <div class="gallery-overlay"><span class="gallery-tag">// eva unit-01</span></div>
                 </div>
+                <!-- 4 -->
                 <div class="gallery-item">
                     <img src="https://images7.alphacoders.com/117/thumb-1920-1178790.jpg" alt="Anime dancing scene">
-                    <div class="gallery-overlay">
-                        <span class="gallery-tag">// bloom</span>
-                    </div>
+                    <div class="gallery-overlay"><span class="gallery-tag">// bloom</span></div>
                 </div>
+                <!-- 5 -->
+                <div class="gallery-item">
+                    <img src="https://images2.alphacoders.com/130/1303240.jpg" alt="Shinji Ikari">
+                    <div class="gallery-overlay"><span class="gallery-tag">// shinji ikari</span></div>
+                </div>
+
+                <!-- 6: featured -->
+                <div class="gallery-item featured">
+                    <img src="https://images6.alphacoders.com/132/1321547.jpg" alt="Evangelion panorama">
+                    <div class="gallery-overlay"><span class="gallery-tag">// evangelion — rebuild</span></div>
+                </div>
+                <!-- 7 -->
+                <div class="gallery-item">
+                    <img src="https://images2.alphacoders.com/100/1005516.jpg" alt="Asuka Langley">
+                    <div class="gallery-overlay"><span class="gallery-tag">// asuka langley</span></div>
+                </div>
+
+                <!-- 8 -->
+                <div class="gallery-item">
+                    <img src="https://images6.alphacoders.com/100/1004379.jpg" alt="Rei Ayanami">
+                    <div class="gallery-overlay"><span class="gallery-tag">// rei ayanami</span></div>
+                </div>
+                <!-- 9 -->
+                <div class="gallery-item">
+                    <img src="https://images4.alphacoders.com/131/1318013.jpg" alt="Bloom anime">
+                    <div class="gallery-overlay"><span class="gallery-tag">// bloom</span></div>
+                </div>
+                <!-- 10 -->
+                <div class="gallery-item">
+                    <img src="https://images6.alphacoders.com/128/1287415.jpg" alt="Anime sunset">
+                    <div class="gallery-overlay"><span class="gallery-tag">// bloom</span></div>
+                </div>
+
             </div>
         </section>
 
         <footer>
-            <p class="footer-msg">feito com muito <span class="heart">♥</span> pra você</p>
+            <p class="footer-msg">feito com muito carinho <span class="heart">♥</span> pra você</p>
             <p class="footer-msg" style="font-size:0.65rem; margin-top:4px;">calebebr1.github.io</p>
         </footer>
 
     </div>
 
     <script>
-        // Generate floating particles
         const container = document.getElementById('particles');
         const colors = ['#7B2CBF', '#9D4EDD', '#00ff41', '#ffffff'];
         for (let i = 0; i < 35; i++) {
